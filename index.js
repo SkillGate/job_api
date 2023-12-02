@@ -19,10 +19,10 @@ mongoose
   });
 
 var corsOptions = {
-  origin: [
-    "http://localhost:3000",
-    "https://fluffy-sopapillas-e80ba6.netlify.app",
-  ],
+  origin: ["https://skillgate.github.io", "http://localhost:3000"],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204,
 };
 
 app.use(cors(corsOptions));
