@@ -16,6 +16,10 @@ router.post("/", verifyToken, async (req, res) => {
 
 //UPDATE
 router.put("/:id", verifyToken, async (req, res) => {
+  if (!req.params.id) {
+    return res.status(400).json({ error: "ID is required" });
+  }
+  
   try {
     const updatedJob = await Job.findByIdAndUpdate(
       req.params.id,
@@ -32,6 +36,10 @@ router.put("/:id", verifyToken, async (req, res) => {
 
 //DELETE
 router.delete("/:id", verifyToken, async (req, res) => {
+  if (!req.params.id) {
+    return res.status(400).json({ error: "ID is required" });
+  }
+
   try {
     await Job.findByIdAndDelete(req.params.id);
     res.status(200).json("Job has been deleted...");
@@ -42,6 +50,9 @@ router.delete("/:id", verifyToken, async (req, res) => {
 
 //GET Job
 router.get("/find/:id", verifyToken, async (req, res) => {
+  if (!req.params.id) {
+    return res.status(400).json({ error: "ID is required" });
+  }
   try {
     const job = await Job.findById(req.params.id);
     // const { password, ...others } = Job._doc;
@@ -66,6 +77,9 @@ router.get("/", verifyToken, async (req, res) => {
 
 //GET Jobs by userId
 router.get("/find/jobs/:userId", verifyToken, async (req, res) => {
+  if (!req.params.userId) {
+    return res.status(400).json({ error: "UserId is required" });
+  }
   try {
     const Jobs = await Job.find({ userId: req.params.userId });
     res.status(200).json(Jobs);
